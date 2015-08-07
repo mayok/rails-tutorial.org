@@ -17,5 +17,8 @@ vendor/bundle
 !/log/.keep
 /tmp
 
+# Ignore Spring files.
+/spring/*.pid
+
 # Ignore vim swap file.
 *.swp
