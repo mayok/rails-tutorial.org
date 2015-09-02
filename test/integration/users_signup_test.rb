@@ -15,4 +15,19 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     # アカウント作成に失敗したら、users/new が描画されるかテストする
     assert_template 'users/new'
   end
+
+  test "valid signup information" do
+    get signup_path
+    # 有効な情報では User.count が 1 変わることをテストする
+    assert_difference 'User.count', 1 do
+      # post したあとのリダイレクトにも追従する
+      post_via_redirect users_path, user: { name: "Example User",
+                                            email: "user@example.com",
+                                            password: "foobar",
+                                            password_confirmation: "foobar" }
+    end
+
+    # アカウント作成に成功したら、users/show が描画されるかテストする
+    assert_template 'users/show'
+  end
 end
