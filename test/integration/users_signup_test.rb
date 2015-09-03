@@ -14,6 +14,8 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
 
     # アカウント作成に失敗したら、users/new が描画されるかテストする
     assert_template 'users/new'
+    assert_select 'div#error_explanation'
+    assert_select 'div.alert-danger'
   end
 
   test "valid signup information" do
@@ -29,5 +31,6 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
 
     # アカウント作成に成功したら、users/show が描画されるかテストする
     assert_template 'users/show'
+    assert_not flash.empty?
   end
 end
