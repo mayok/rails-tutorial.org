@@ -7,7 +7,8 @@ class SessionsController < ApplicationController
     # has_secure_password が authenticate method を用意してくれてる
     # 正しい password であれば、User を返す
     if user && user.authenticate(params[:session][:password])
-      # Login
+      log_in user
+      redirect_to user
     else
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new'
